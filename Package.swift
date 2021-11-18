@@ -10,7 +10,7 @@ let package = Package(
             targets: ["Regressor"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/apple/swift-numerics", .upToNextMajor(from: "1.0.2")),
+        .package(url: "https://github.com/apple/swift-numerics", from: "1.0.0"),
     ],
     targets: [
         .target(
