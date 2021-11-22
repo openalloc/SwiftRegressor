@@ -24,6 +24,11 @@ class LinearRegressorTests: XCTestCase {
     
     typealias Point = BaseRegressor<Double>.Point
     
+    func testBadInit() {
+        let points = [Point]()
+        XCTAssertNil(LinearRegressor(points: points))
+    }
+    
     // this example verified in Numbers
     func test1() {
         let points: [Point] = [
@@ -39,7 +44,7 @@ class LinearRegressorTests: XCTestCase {
             Point(x: 30, y: 30 ),
         ]
         
-        let lr = LinearRegressor(points: points)
+        let lr = LinearRegressor(points: points)!
         XCTAssertEqual(-7.709, lr.intercept, accuracy: epsilon3)
         XCTAssertEqual(0.733, lr.slope, accuracy: epsilon3)
         
@@ -69,7 +74,7 @@ class LinearRegressorTests: XCTestCase {
             Point(x: 6, y: 36),
         ]
         
-        let lr = LinearRegressor(points: points)
+        let lr = LinearRegressor(points: points)!
         XCTAssertEqual(22.0, lr.yRegression(x: 4.5), accuracy: epsilon3)
         XCTAssertEqual(5.833, lr.xEstimate(y: 30)!, accuracy: epsilon3)
         XCTAssertEqual(7, lr.count)

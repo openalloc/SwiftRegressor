@@ -33,7 +33,8 @@ open class BaseRegressor<T: BinaryFloatingPoint> {
     /// the input values upon which we'll build our estimates
     public let points: [Point]
     
-    internal init(points: [Point]) {
+    internal init?(points: [Point]) {
+        guard points.count > 0 else { return nil }
         self.points = points
     }
     

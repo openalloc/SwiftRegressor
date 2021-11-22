@@ -57,6 +57,18 @@ It's often convenient to declare your own derivative type:
 typealias MyPoint = BaseRegressor<Float>.Point
 ```
 
+## Initialization
+
+Both the base and linear regressor share the same initialization:
+
+- `init?(points: [BaseRegressor<T>.Point])`
+
+Initialization will fail and return `nil` if provided nonsense parameters, such as no points provided.
+
+The initialization values are also available as properties:
+
+- `let points: [BaseRegressor<T>.Point]`: the points in the source data set
+
 ## Instance Properties and Methods
 
 Computed properties are lazy, meaning that they are only calculated when first needed.
@@ -64,8 +76,6 @@ Computed properties are lazy, meaning that they are only calculated when first n
 #### Base Regressor
 
 The base regressor offers functionality common to different types of regressions.
-
-- `let points: [BaseRegressor<T>.Point]`: the points in the source data set
 
 - `var count: T`: the count of points in the data set
 
@@ -84,8 +94,6 @@ The base regressor offers functionality common to different types of regressions
 #### Linear Regressor
 
 The linear regressor inherits all the properties and methods of the base regressor.
-
-- `init(points: [BaseRegressor<T>.Point])`: initialize a new linear regression
 
 - `var intercept: T`:  Intercept (a)
 

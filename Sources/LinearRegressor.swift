@@ -21,7 +21,7 @@ import Numerics
 
 public final class LinearRegressor<T: BinaryFloatingPoint & Real>: BaseRegressor<T> {
     
-    public override init(points: [Point]) {
+    public override init?(points: [Point]) {
         super.init(points: points)
     }
     
