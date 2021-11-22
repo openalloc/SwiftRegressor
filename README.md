@@ -19,7 +19,7 @@ let points: [BaseRegressor<Double>.Point] = [
     Point(x: 6, y: 36),
 ]
 
-let lr = LinearRegressor(points: points)
+let lr = LinearRegressor(points: points)!
 
 print(String(format: "Intercept: %.1f", lr.intercept))
 => "Intercept: -5.0"
