@@ -76,7 +76,8 @@ class LinearRegressorTests: XCTestCase {
         
         let lr = LinearRegressor(points: points)!
         XCTAssertEqual(22.0, lr.yRegression(x: 4.5), accuracy: epsilon3)
-        XCTAssertEqual(5.833, lr.xEstimate(y: 30)!, accuracy: epsilon3)
+        XCTAssertEqual(5.833, lr.xEstimates(y: 30).first!, accuracy: epsilon3)
+        XCTAssertEqual(5.833, lr.xEstimate(y: 30), accuracy: epsilon3)
         XCTAssertEqual(7, lr.count)
         XCTAssertEqual(21.0, lr.summed.x, accuracy: epsilon3)
         XCTAssertEqual(91.0, lr.summed.y, accuracy: epsilon3)

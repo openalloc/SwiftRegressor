@@ -17,8 +17,9 @@
 //
 
 import Foundation
+import Numerics
 
-open class BaseRegressor<T: BinaryFloatingPoint> {
+open class BaseRegressor<T: BinaryFloatingPoint & Real> {
    
     public struct Point: Equatable {
         public let x, y: T
@@ -40,11 +41,12 @@ open class BaseRegressor<T: BinaryFloatingPoint> {
     
     /// should override this
     open func yRegression(x: T) -> T {
-        T.zero
+        fatalError("Override yRegression() in your subclass")
     }
     
-    open func xEstimate(y: T) -> T? {
-        T.zero
+    /// should override this
+    open func xEstimates(y: T) -> [T] {
+        fatalError("Override xEstimates() in your subclass")
     }
     
     public lazy var resultValuesY: [T] = {

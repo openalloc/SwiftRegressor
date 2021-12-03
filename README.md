@@ -30,7 +30,7 @@ print(String(format: "Slope: %.1f", lr.slope))
 print(String(format: "y @ x=4.5: %.1f", lr.yRegression(x: 4.5)))
 => "y @ x=4.5: 22.0"
 
-print(String(format: "x @ y=30: %.1f", lr.xEstimate(y: 30)!))
+print(String(format: "x @ y=30: %.1f", lr.xEstimates(y: 30).first!))
 => "x @ y=30: 5.8"
 
 print(String(format: "r^2: %.3f", lr.rSquared))
@@ -83,7 +83,7 @@ The base regressor offers functionality common to different types of regressions
 
 - `var summed: BaseRegressor<T>.Point`: the sum of values along both axes
 
-- `func xEstimate(y: T) -> T?`: estimate an x-value from a y-value
+- `func xEstimates(y: T) -> [T]`: estimate real-number x-value solutions from a y-value
 
 - `func yRegression(x: T) -> T`: estimate a y-value from an x-value
 
@@ -94,6 +94,8 @@ The base regressor offers functionality common to different types of regressions
 #### Linear Regressor
 
 The linear regressor inherits all the properties and methods of the base regressor.
+
+- `func xEstimate(y: T) -> T`: estimate an x-value from a y-value
 
 - `var intercept: T`:  Intercept (a)
 

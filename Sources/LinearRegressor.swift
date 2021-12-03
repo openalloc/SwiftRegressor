@@ -29,8 +29,12 @@ public final class LinearRegressor<T: BinaryFloatingPoint & Real>: BaseRegressor
         (slope * x) + intercept
     }
     
-    override public func xEstimate(y: T) -> T? {
-        (y - intercept) / slope
+    override public func xEstimates(y: T) -> [T] {
+        [(y - intercept) / slope]
+    }
+
+    func xEstimate(y: T) -> T {
+        xEstimates(y: y).first!
     }
     
     public lazy var summedSquareError: Point = {
