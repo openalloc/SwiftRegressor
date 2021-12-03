@@ -33,7 +33,7 @@ public final class LinearRegressor<T: BinaryFloatingPoint & Real>: BaseRegressor
         [(y - intercept) / slope]
     }
 
-    func xEstimate(y: T) -> T {
+    public func xEstimate(y: T) -> T {
         xEstimates(y: y).first!
     }
     
