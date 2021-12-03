@@ -30,7 +30,7 @@ print(String(format: "Slope: %.1f", lr.slope))
 print(String(format: "y @ x=4.5: %.1f", lr.yRegression(x: 4.5)))
 => "y @ x=4.5: 22.0"
 
-print(String(format: "x @ y=30: %.1f", lr.xEstimates(y: 30).first!))
+print(String(format: "x @ y=30: %.1f", lr.xEstimate(y: 30)))
 => "x @ y=30: 5.8"
 
 print(String(format: "r^2: %.3f", lr.rSquared))
