@@ -1,6 +1,6 @@
 //
 //  XCT+Array.swift
-//  
+//
 // Copyright 2021, 2022 OpenAlloc LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,8 +26,8 @@ public func XCTAssertEqual<T>(_ array1: [T],
         XCTFail("array sizes don't match")
         return
     }
-    
-    (0..<array1.count).forEach {
+
+    (0 ..< array1.count).forEach {
         let value1 = array1[$0]
         let value2 = array2[$0]
         XCTAssertEqual(value1, value2, accuracy: accuracy)

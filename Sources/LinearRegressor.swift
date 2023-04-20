@@ -1,6 +1,6 @@
 //
 // LinearRegressor.swift
-//  
+//
 // Copyright 2021, 2022 OpenAlloc LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,15 +20,14 @@ import Foundation
 import Numerics
 
 public final class LinearRegressor<T: BinaryFloatingPoint & Real>: BaseRegressor<T> {
-    
-    public override init?(points: [Point]) {
+    override public init?(points: [Point]) {
         super.init(points: points)
     }
-    
+
     override public func yRegression(x: T) -> T {
         (slope * x) + intercept
     }
-    
+
     override public func xEstimates(y: T) -> [T] {
         [(y - intercept) / slope]
     }
@@ -36,50 +35,36 @@ public final class LinearRegressor<T: BinaryFloatingPoint & Real>: BaseRegressor
     public func xEstimate(y: T) -> T {
         xEstimates(y: y).first!
     }
-    
-    public lazy var summedSquareError: Point = {
-        points.reduce(pointZero) {
-            let ex = $1.x - mean.x
-            let ey = $1.y - mean.y
-            return Point(x: $0.x + (ex * ex),
-                         y: $0.y + (ey * ey))
-        }
-    }()
-    
-    public lazy var sampleStandardDeviation: Point = {
-        Point(x: sqrt(summedSquareError.x / (count - 1)),
-              y: sqrt(summedSquareError.y / (count - 1)))
-    }()
-    
+
+    public lazy var summedSquareError: Point = points.reduce(pointZero) {
+        let ex = $1.x - mean.x
+        let ey = $1.y - mean.y
+        return Point(x: $0.x + (ex * ex),
+                     y: $0.y + (ey * ey))
+    }
+
+    public lazy var sampleStandardDeviation: Point = .init(x: sqrt(summedSquareError.x / (count - 1)),
+                                                           y: sqrt(summedSquareError.y / (count - 1)))
+
     /// Pearson's Correlation (r)
     public lazy var pearsonsCorrelation: T = {
         let numerator = points.reduce(T.zero) { $0 + (($1.x - mean.x) * ($1.y - mean.y)) }
         let denominator = (count - 1) * sampleStandardDeviation.x * sampleStandardDeviation.y
         return numerator / denominator
     }()
-    
+
     /// Slope (b)
-    public lazy var slope: T = {
-        pearsonsCorrelation * sampleStandardDeviation.y / sampleStandardDeviation.x
-    }()
-    
+    public lazy var slope: T = pearsonsCorrelation * sampleStandardDeviation.y / sampleStandardDeviation.x
+
     /// Intercept (a)
-    public lazy var intercept: T = {
-        mean.y - slope * mean.x
-    }()
-    
-    public lazy var ssTotal: T = {
-        summedSquareError.y
-    }()
-    
-    public lazy var ssRegression: T = {
-        points.reduce(T.zero) {
-            let rye = $1.y - yRegression(x: $1.x)
-            return $0 + (rye * rye)
-        }
-    }()
-    
-    public lazy var rSquared: T = {
-        1 - (ssRegression / ssTotal)
-    }()
+    public lazy var intercept: T = mean.y - slope * mean.x
+
+    public lazy var ssTotal: T = summedSquareError.y
+
+    public lazy var ssRegression: T = points.reduce(T.zero) {
+        let rye = $1.y - yRegression(x: $1.x)
+        return $0 + (rye * rye)
+    }
+
+    public lazy var rSquared: T = 1 - (ssRegression / ssTotal)
 }

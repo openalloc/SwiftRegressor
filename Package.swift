@@ -22,7 +22,8 @@ let package = Package(
     products: [
         .library(
             name: "Regressor",
-            targets: ["Regressor"]),
+            targets: ["Regressor"]
+        ),
     ],
     dependencies: [
         .package(url: "https://github.com/apple/swift-numerics", from: "1.0.0"),
@@ -33,12 +34,14 @@ let package = Package(
             dependencies: [
                 .product(name: "Numerics", package: "swift-numerics"),
             ],
-            path: "Sources"),
+            path: "Sources"
+        ),
         .testTarget(
             name: "RegressorTests",
             dependencies: [
                 "Regressor",
             ],
-            path: "Tests"),
+            path: "Tests"
+        ),
     ]
 )
